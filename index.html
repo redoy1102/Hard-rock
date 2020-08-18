@@ -46,25 +46,23 @@
             <div class="search-bar col-md-6 mx-auto">
                 <h1 class="text-center">Lyrics Search</h1>
                 <div class="search-box my-5">
-                    <input type="text" class="form-control" placeholder="Enter your artist song name">
-                    <button class="btn btn-success search-btn">Search</button>
+                    <input id="search-box" type="text" class="form-control" placeholder="Enter your artist song name">
+                    <button id="search-button" class="btn btn-success search-btn">Search</button>
                 </div>
             </div>
             <!-- === Simple results === -->
             <div class="d-flex justify-content-center">
-                <div class="">
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                <div id="lyricList" class="">
+                    <p class="author lead"> <span id="song-title">Purple Noon</span>  Album by <span id="song-album">Washed Out</span> <button id="lyrics-Button" class="btn btn-success">Get Lyrics</button></p>
+                    
+
                 </div>
             </div>
             <!-- Single Lyrics -->
             <div class="single-lyrics text-center">
                 <button class="btn go-back">&lsaquo;</button>
                 <h2 class="text-success mb-4">Pentatonix - Na Na Na</h2>
-                <pre class="lyric text-white">
+                <pre id="lyrics" class="lyric text-white">
     Wont go whistling like the wind blows,
     Looking out my window,
     Just to see the shine
@@ -220,7 +218,45 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Custom Script Here -->
+<script>
+    //Search Button
+    var button =  document.getElementById('search-button');
+    button.addEventListener('click',function(){
+    // console.log('clicked');
 
+    //API:
+    var searchBox = document.getElementById('search-box').value;
+    fetch(`https://api.lyrics.ovh/suggest/${searchBox}`)
+    .then(res => res.json())
+    .then(data => {
+        // console.log(data);
+        for (let i = 0; i < 10; i++) {
+            const element = data.data[i];
+            console.log(element);
+            
+
+        
+            
+        }
+        // document.getElementById('song-title').innerText = searchBox;
+        // document.getElementById('song-album').innerText = data.data[0].album.title;
+    })
+})
+    //Lyrics Button
+    // var lyricsButton = document.getElementById('lyrics-Button');
+    // lyricsButton.addEventListener('click', function(){
+    //     // console.log('clicked');
+
+    // //Lyrics API
+    //     fetch(`https://api.lyrics.ovh/v1/data.data[0].artist/summer`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         document.getElementById('lyrics').innerText = data.lyrics;
+    //     })
+    // })
+
+</script>
 </body>
 
 </html>
